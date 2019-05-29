@@ -8,3 +8,8 @@ except urllib.error.URLError as e:
     print(type(e.reason))  # reason 属性返回的不一定是字符串，在这里是socket.timeout 类
     if isinstance(e.reason, socket.timeout):  # 判断e.reason的类型。
         print('TIME OUT')
+
+# 运行结果如下
+
+# <class 'socket.timeout'>
+# TIME OUT
