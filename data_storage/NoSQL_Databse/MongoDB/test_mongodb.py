@@ -21,3 +21,20 @@ student = {
 
 result = collection.insert_one(student)
 print(result)
+
+student1 = {
+    'id': '20170102',
+    'name': 'Bob',
+    'age': 20,
+    'gender': 'male',
+}
+
+student2 = {
+    'id': '20170103',
+    'name': 'Tom',
+    'age': 20,
+    'gender': 'male',
+}
+result = collection.insert_many([student1, student2])
+print(result)
+print(result.inserted_ids)
