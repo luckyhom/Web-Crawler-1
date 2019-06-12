@@ -8,8 +8,9 @@ from pyquery import PyQuery as pq
 import pymongo
 import time
 
-
-browser = webdriver.Chrome()
+chrome_options = webdriver.ChromeOptions()
+chrome_options.add_argument('--headless')
+browser = webdriver.Chrome(chrome_options=chrome_options)  # 启用Chrome的无头模式
 wait = WebDriverWait(browser, 10)
 KEYWORD = 'iPhoneXR'
 
