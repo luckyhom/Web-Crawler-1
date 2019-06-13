@@ -1,11 +1,11 @@
 import time
 from selenium import webdriver
+from selenium.webdriver import ActionChains
 from selenium.webdriver.support import expected_conditions as EC
 from selenium.webdriver.support.wait import WebDriverWait
 from selenium.webdriver.common.by import By
 from io import BytesIO
 from PIL import Image
-
 
 
 EMAIL = 'test@test.com'
@@ -14,7 +14,7 @@ PASSWORD = '123456'
 
 class CrackGeetest():
     def __init__(self):
-        self.url = 'https://auth.geetest.com/login'
+        self.url = 'https://account.geetest.com/login'
         self.browser = webdriver.Chrome()
         self.wait = WebDriverWait(self.browser, 20)
         self.email = EMAIL
@@ -46,8 +46,8 @@ class CrackGeetest():
         time.sleep(2)
         location = img.location
         size = img.size
-        top, bottom, left, right = location['y'], location['y'] + size['height'], location['x'],\
-                                   location['x'] + size['width']
+        top, bottom, left, right = location['y'], location['y'] + size['height'], location['x'], location['x']\
+                                   + size['width']
         return (top, bottom, left, right)
 
     def get_geetest_image(self):
@@ -103,7 +103,7 @@ class CrackGeetest():
                     return left
         return left
 
-    def get_tracke(self, distance):
+    def get_track(self, distance):
         """
         根据偏移量获取移动轨迹
         :param distance: 偏移量
@@ -138,3 +138,39 @@ class CrackGeetest():
             # 加入轨迹
             track.append(round(move))
         return track
+
+    def move_to_gap(self, slider, tracks):
+        """
+        拖动滑块到缺口处
+        :param slider: 滑块
+        :param tracks: 轨迹
+        :return:
+        """
+        ActionChains(self.browser).click_and_hold(slider).perform()
+        for x in tracks:
+            ActionChains(self.browser).move_by_offset(xoffset=x, yoffset=0).perform()
+        time.sleep(0.5)
+        ActionChains(self.browser).release().perform()
+
+    def open(self):
+        """
+        打开网页输入用户名和密码
+        :return:
+        """
+        self.browser.get(self.url)
+        email = self.wait.until(
+            EC.presence_of_element_located(
+                (By.CSS_SELECTOR,
+                 '#base > div.content-outter > div > div.inner-conntent > div:nth-child(3) > div > form '
+                 '> div:nth-child(1) > div > div > div > input')))
+        password = self.wait.until(
+            EC.presence_of_element_located(
+                (
+                    By.CSS_SELECTOR,
+                    '#base > div.content-outter > div > div.inner-conntent > div:nth-child(3) > div > form '
+                    '> div:nth-child(2) > div > div:nth-child(1) > div > input'
+                )
+            )
+        )
+        email.send_keys(self.email)
+        password.send_keys(self.password)
