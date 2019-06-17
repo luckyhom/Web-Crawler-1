@@ -154,13 +154,13 @@ class CrackWeiboSlide():
                     ActionChains(self.browser).move_by_offset(dx / times, dy / times).perform()
                     time.sleep(1/times)
             # 如果是最后一次循环
-            if index = 3:
+            if index == 3:
                 # 松开鼠标
                 ActionChains(self.browser).release().perform()
             else:
                 # 计算下一次偏移
-                dx = circles[number[index + 1] + 1].location['x'] - circle.location['x']
-                dy = circles[number[index + 1] + 1].location['y'] - circle.location['y']
+                dx = circles[numbers[index + 1] + 1].location['x'] - circle.location['x']
+                dy = circles[numbers[index + 1] + 1].location['y'] - circle.location['y']
     
     def main(self):
         """
