@@ -1,16 +1,10 @@
 import time
 from multiprocessing import Process
-from proxy_poll.api import app
-from .db import RedisClient
+from .api import app
 from .getter import Getter
 from .tester import Tester
-from .setting import TESTER_CYCLE
-from .setting import TESTER_ENABLED
-from .setting import GETTER_CYCLE
-from .setting import GETTER_ENABLED
-from .setting import API_ENABLED
-from .setting import API_HOST
-from .setting import API_PORT
+from .db import RedisClient
+from .setting import *
 
 
 class Scheduler():
@@ -40,7 +34,7 @@ class Scheduler():
 
     def schedule_api(self):
         """
-        开启api
+        开启API
         :return:
         """
         app.run(API_HOST, API_PORT)

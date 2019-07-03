@@ -1,9 +1,9 @@
 import requests
 from requests.exceptions import ConnectionError
 
+
 base_headers = {
-    'User-Agent': 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) '
-                  'AppleWebKit/537.36 (KHTML, like Gecko) Chrome/54.0.2840.71 Safari/537.36',
+    'User-Agent': 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/54.0.2840.71 Safari/537.36',
     'Accept-Encoding': 'gzip, deflate, sdch',
     'Accept-Language': 'en-US,en;q=0.9,zh-CN;q=0.8,zh;q=0.7'
 }
@@ -11,10 +11,9 @@ base_headers = {
 
 def get_page(url, options={}):
     """
-    抓取代理
-    :param url:
-    :param options:
-    :return:
+    抓取代理页面代码
+    :param url: 代理页面网址
+    :param options: 选项
     """
     headers = dict(base_headers, **options)
     print('正在抓取', url)
