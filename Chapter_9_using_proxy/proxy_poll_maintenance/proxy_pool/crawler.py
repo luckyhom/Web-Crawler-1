@@ -12,8 +12,8 @@ class ProxyMetaclass(type):
             if 'crawl_' in k:
                 attrs['__CrawlFunc__'].append(k)
                 count += 1
-            attrs['__CrawlFuncCount__'] = count
-            return type.__new__(cls, name, bases, attrs)
+        attrs['__CrawlFuncCount__'] = count
+        return type.__new__(cls, name, bases, attrs)
 
 
 class Crawler(object, metaclass=ProxyMetaclass):

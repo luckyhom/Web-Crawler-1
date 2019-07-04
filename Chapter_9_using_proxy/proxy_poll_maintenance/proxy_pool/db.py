@@ -3,13 +3,7 @@ import redis
 from random import choice
 
 from .error import PoolEmptyError
-from .setting import REDIS_HOST
-from .setting import REDIS_PORT
-from .setting import REDIS_PASSWORD
-from .setting import REDIS_KEY
-from .setting import MAX_SCORE
-from .setting import MIN_SCORE
-from .setting import INITIAL_SCORE
+from .setting import *
 
 
 class RedisClient(object):
@@ -29,18 +23,18 @@ class RedisClient(object):
         :param score: 分数
         :return: 添加结果
         """
-        if not re.match('\d+\.\d+\.\d+\.\d+\:\d+', proxy):
+        if not re.match(r'\d+\.\d+\.\d+\.\d+\:\d+', proxy):
             print('代理不符合规范', proxy, '丢弃')
             return
         if not self.db.zscore(REDIS_KEY, proxy):
-            return self.db.zadd(REDIS_KEY, score, proxy)
+            return self.db.zadd(REDIS_KEY, {proxy: score})
     
     def random(self):
         """
         随机获取有效代理，首先尝试获取最高分数代理，如果不存在，按照排名获取，否则异常
         :return: 随机代理
         """
-        result = self.db.zremrangebyscore(REDIS_KEY, MAX_SCORE, MAX_SCORE)
+        result = self.db.zrangebyscore(REDIS_KEY, MAX_SCORE, MAX_SCORE)
         if len(result):
             return choice(result)
         else:
@@ -93,7 +87,7 @@ class RedisClient(object):
         获取全部代理
         :rerurn: 全部代理列表
         """
-        return self.db.zremrangebyscore(REDIS_KEY, MIN_SCORE, MAX_SCORE)
+        return self.db.zrangebyscore(REDIS_KEY, MIN_SCORE, MAX_SCORE)
     
     def batch(self, start, stop):
         """
