@@ -1,0 +1,18 @@
+VALID_STATUSES = [200]
+# 最大错误次数
+MAX_FAILED_TIME = 3
+
+# Redis设置
+REDIS_HOST = 'localhost'
+REDIS_PORT = 6379
+REDIS_PASSWORD = None
+REDIS_KEY = 'weixin'
+
+# MySQL设置
+MYSQL_HOST = 'localhost'
+MYSQL_USER = 'root'
+MYSQL_PASSWORD = 'Xiaoai@0013'
+MYSQL_PORT = 3306
+MYSQL_DATABASE = 'weixin'
+
+TIMEOUT = 10
