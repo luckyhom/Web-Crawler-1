@@ -1,6 +1,6 @@
 VALID_STATUSES = [200]
 # 最大错误次数
-MAX_FAILED_TIME = 3
+MAX_FAILED_TIME = 20
 
 # Redis设置
 REDIS_HOST = 'localhost'
@@ -16,3 +16,6 @@ MYSQL_PORT = 3306
 MYSQL_DATABASE = 'weixin'
 
 TIMEOUT = 10
+
+# 代理池网址
+PROXY_POOL_URL = 'http://127.0.0.1:5555/random'
