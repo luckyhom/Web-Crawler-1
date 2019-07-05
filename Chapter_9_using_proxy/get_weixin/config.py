@@ -11,7 +11,7 @@ REDIS_KEY = 'weixin'
 # MySQL设置
 MYSQL_HOST = 'localhost'
 MYSQL_USER = 'root'
-MYSQL_PASSWORD = 'Xiaoai@0013'
+MYSQL_PASSWORD = '*****'
 MYSQL_PORT = 3306
 MYSQL_DATABASE = 'weixin'
 
